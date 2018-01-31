@@ -3,7 +3,7 @@ defmodule CodeClicker.Accounts.UserItem do
   import Ecto.Changeset
 
   schema "user_items" do
-    field(:count, :integer)
+    field(:count, :integer, default: 0)
     belongs_to(:user, CodeClicker.Accounts.User, foreign_key: :user_id)
     belongs_to(:item, CodeClicker.Store.Item, foreign_key: :item_id)
 
