@@ -8,6 +8,8 @@ defmodule CodeClicker.Accounts.User do
     field(:password, :string)
     field(:username, :string)
 
+    has_many(:user_items, CodeClicker.Accounts.UserItem)
+
     timestamps()
   end
 

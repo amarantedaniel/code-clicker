@@ -3,12 +3,11 @@ defmodule CodeClicker.Store.Item do
   import Ecto.Changeset
   alias CodeClicker.Store.Item
 
-
   schema "items" do
-    field :base_price, :integer
-    field :clicks_per_second, :integer
-    field :name, :string
-    field :price_multiplier, :float
+    field(:base_price, :integer)
+    field(:clicks_per_second, :integer)
+    field(:name, :string)
+    field(:price_multiplier, :float)
 
     timestamps()
   end
