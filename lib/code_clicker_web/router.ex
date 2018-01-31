@@ -7,6 +7,6 @@ defmodule CodeClickerWeb.Router do
 
   scope "/api", CodeClickerWeb do
     pipe_through(:api)
-    resources("/items", ItemController, except: [:new, :edit])
+    resources("/items", ItemController, only: [:index, :show])
   end
 end
