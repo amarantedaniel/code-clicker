@@ -15,7 +15,7 @@ defmodule CodeClicker.Accounts.User do
 
   def changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:username, :password, :company_name])
-    |> validate_required([:username, :password, :company_name])
+    |> cast(attrs, [:username, :company_name])
+    |> validate_required([:username, :company_name])
   end
 end

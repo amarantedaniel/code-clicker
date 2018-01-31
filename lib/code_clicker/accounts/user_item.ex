@@ -13,6 +13,5 @@ defmodule CodeClicker.Accounts.UserItem do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:count])
-    |> validate_required([:count])
   end
 end
