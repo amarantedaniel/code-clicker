@@ -10,7 +10,7 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
-alias CodeClicker.{Store.Item, Repo}
+alias CodeClicker.{Store.Item, Repo, Accounts.User}
 
 # We are deleting the data here !!!!!!!>!!<!>!<><>!<
 Repo.all(Item)
@@ -36,4 +36,10 @@ software_developer_seed = %{
 
 %Item{}
 |> Item.changeset(software_developer_seed)
+|> Repo.insert!()
+
+test_user = %{"company_name" => "Apple", "username" => "Test User", "password" => "blabla"}
+
+%User{}
+|> User.changeset(test_user)
 |> Repo.insert!()

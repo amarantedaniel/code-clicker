@@ -12,7 +12,6 @@ defmodule CodeClicker.Store.Item do
     timestamps()
   end
 
-  @doc false
   def changeset(%Item{} = item, attrs) do
     item
     |> cast(attrs, [:name, :base_price, :price_multiplier, :clicks_per_second])
