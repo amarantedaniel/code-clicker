@@ -9,6 +9,10 @@ config :code_clicker, CodeClickerWeb.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
+# Configure Comeonin
+config :comeonin, :bcrypt_log_rounds, 4
+config :comeonin, :pbkdf2_rounds, 1
+
 # Configure your database
 config :code_clicker, CodeClicker.Repo,
   adapter: Ecto.Adapters.Postgres,
