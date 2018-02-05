@@ -5,8 +5,8 @@ defmodule CodeClicker.Accounts.User do
 
   schema "users" do
     field(:company_name, :string)
-    field(:password, :string)
     field(:username, :string)
+    field(:password, :string, virtual: true)
 
     has_many(:user_items, CodeClicker.Accounts.UserItem)
 
