@@ -6,6 +6,7 @@ defmodule CodeClicker.Accounts.User do
   schema "users" do
     field(:company_name, :string)
     field(:username, :string)
+    field(:password_hash, :string)
     field(:password, :string, virtual: true)
 
     has_many(:user_items, CodeClicker.Accounts.UserItem)
@@ -17,5 +18,16 @@ defmodule CodeClicker.Accounts.User do
     user
     |> cast(attrs, [:username, :password, :company_name])
     |> validate_required([:username, :password])
+    |> put_encrypted_password
+  end
+
+  defp put_encrypted_password(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: pass}} ->
+        put_change(changeset, :password_hash, Comeonin.Bcrypt.hashpwsalt(pass))
+
+      _ ->
+        changeset
+    end
   end
 end

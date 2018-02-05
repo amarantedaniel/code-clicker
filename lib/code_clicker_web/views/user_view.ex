@@ -11,9 +11,11 @@ defmodule CodeClickerWeb.UserView do
   end
 
   def render("user.json", %{user: user}) do
-    %{id: user.id,
+    %{
+      id: user.id,
       username: user.username,
-      password: user.password,
-      company_name: user.company_name}
+      password_hash: user.password_hash,
+      company_name: user.company_name
+    }
   end
 end
