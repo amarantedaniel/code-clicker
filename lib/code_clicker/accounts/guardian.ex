@@ -7,7 +7,7 @@ defmodule CodeClicker.Accounts.Guardian do
 
   def resource_from_claims(claims) do
     user_id = claims["sub"]
-    user = Accounts.get_user(user_id)
+    user = CodeClicker.Accounts.get_user!(user_id)
     {:ok, user}
   end
 end
