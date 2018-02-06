@@ -17,4 +17,10 @@ defmodule CodeClickerWeb.FallbackController do
     |> put_status(:not_found)
     |> render(CodeClickerWeb.ErrorView, :"404")
   end
+
+  def call(conn, nil) do
+    conn
+    |> put_status(:not_found)
+    |> render(CodeClickerWeb.ErrorView, :"404")
+  end
 end

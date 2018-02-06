@@ -8,7 +8,8 @@ defmodule CodeClickerWeb.UserController do
   action_fallback(CodeClickerWeb.FallbackController)
 
   def login(conn, %{"username" => username, "password" => password}) do
-    with {:ok, user} <- Accounts.get_user_by_username!(username) |> check_password(password),
+    with %User{} = user <- Accounts.get_user_by_username!(username),
+         {:ok, user} <- check_password(user, password),
          {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
       conn
       |> put_status(:ok)
