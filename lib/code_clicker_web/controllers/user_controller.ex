@@ -23,17 +23,18 @@ defmodule CodeClickerWeb.UserController do
     end
   end
 
-  def index(conn, _params) do
-    users = Accounts.list_users()
-    render(conn, "index.json", users: users)
-  end
-
-  def create(conn, user_params) do
+  def signup(conn, user_params) do
     with {:ok, %User{} = user} <- Accounts.create_user(user_params),
          {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
       conn
       |> put_status(:created)
       |> render("show_token.json", token: token)
     end
+  end
+
+  # This is for debug only
+  def index(conn, _params) do
+    users = Accounts.list_users()
+    render(conn, "index.json", users: users)
   end
 end
