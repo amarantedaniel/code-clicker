@@ -7,9 +7,7 @@ defmodule CodeClickerWeb.UserController do
   action_fallback(CodeClickerWeb.FallbackController)
 
   def login(conn, %{"username" => username, "password" => password}) do
-    user = Accounts.get_user_by_username!(username)
-
-    with {:ok, user} <- check_password(user, password) do
+    with {:ok, user} <- Accounts.get_user_by_username!(username) |> check_password(password) do
       conn
       |> put_status(:ok)
       |> render("show.json", user: user)
