@@ -6,6 +6,23 @@ defmodule CodeClickerWeb.UserController do
 
   action_fallback(CodeClickerWeb.FallbackController)
 
+  def login(conn, %{"username" => username, "password" => password}) do
+    user = Accounts.get_user_by_username!(username)
+
+    with {:ok, user} <- check_password(user, password) do
+      conn
+      |> put_status(:ok)
+      |> render("show.json", user: user)
+    end
+  end
+
+  def check_password(user, password) do
+    case Comeonin.Bcrypt.checkpw(password, user.password_hash) do
+      true -> {:ok, user}
+      false -> {:error, :not_found}
+    end
+  end
+
   def index(conn, _params) do
     users = Accounts.list_users()
     render(conn, "index.json", users: users)
@@ -16,22 +33,6 @@ defmodule CodeClickerWeb.UserController do
       conn
       |> put_status(:created)
       |> render("show.json", user: user)
-    end
-  end
-
-  def update(conn, %{"id" => id, "user" => user_params}) do
-    user = Accounts.get_user!(id)
-
-    with {:ok, %User{} = user} <- Accounts.update_user(user, user_params) do
-      render(conn, "show.json", user: user)
-    end
-  end
-
-  def delete(conn, %{"id" => id}) do
-    user = Accounts.get_user!(id)
-
-    with {:ok, %User{}} <- Accounts.delete_user(user) do
-      send_resp(conn, :no_content, "")
     end
   end
 end

@@ -9,5 +9,6 @@ defmodule CodeClickerWeb.Router do
     pipe_through(:api)
     resources("/items", ItemController, only: [:index, :show])
     resources("/users", UserController, only: [:create, :index])
+    post("/users/login", UserController, :login)
   end
 end

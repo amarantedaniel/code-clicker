@@ -10,6 +10,10 @@ defmodule CodeClicker.Accounts do
 
   def get_user!(id), do: Repo.get!(User, id)
 
+  def get_user_by_username!(username) do
+    Repo.one(from(u in User, where: u.username == ^username))
+  end
+
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
