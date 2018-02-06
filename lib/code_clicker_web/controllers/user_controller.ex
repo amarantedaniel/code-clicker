@@ -29,10 +29,11 @@ defmodule CodeClickerWeb.UserController do
   end
 
   def create(conn, user_params) do
-    with {:ok, %User{} = user} <- Accounts.create_user(user_params) do
+    with {:ok, %User{} = user} <- Accounts.create_user(user_params),
+         {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
       conn
       |> put_status(:created)
-      |> render("show.json", user: user)
+      |> render("show_token.json", token: token)
     end
   end
 end
