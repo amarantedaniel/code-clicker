@@ -27,8 +27,7 @@ config :cors_plug,
   methods: ["GET", "POST", "PATCH", "DELETE"]
 
 # Configure Guardian
-
-config :code_clicker, MyApp.Guardian,
+config :code_clicker, CodeClicker.Accounts.Guardian,
   issuer: "CodeClicker",
   # mix guardian.gen.secret
   secret_key: "PvZ3uYsAn4IPnHJbeoj2BPyQADyyhqISkp/rGD5NhE7YYHxN1/7B1ziJ8Pl3iWb4"
