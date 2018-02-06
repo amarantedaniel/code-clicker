@@ -3,14 +3,16 @@ defmodule CodeClickerWeb.UserController do
 
   alias CodeClicker.Accounts
   alias CodeClicker.Accounts.User
+  alias CodeClicker.Accounts.Guardian
 
   action_fallback(CodeClickerWeb.FallbackController)
 
   def login(conn, %{"username" => username, "password" => password}) do
-    with {:ok, user} <- Accounts.get_user_by_username!(username) |> check_password(password) do
+    with {:ok, user} <- Accounts.get_user_by_username!(username) |> check_password(password),
+         {:ok, token, _claims} <- Guardian.encode_and_sign(user) do
       conn
       |> put_status(:ok)
-      |> render("show.json", user: user)
+      |> render("show_token.json", token: token)
     end
   end
 
