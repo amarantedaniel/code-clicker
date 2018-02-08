@@ -38,4 +38,14 @@ defmodule CodeClickerWeb.UserController do
     users = Accounts.list_users()
     render(conn, "index.json", users: users)
   end
+
+  def save(conn, _params) do
+    [token | _garbage] = get_req_header(conn, "authorization")
+
+    with {:ok, user, _claims} <- Guardian.resource_from_token(token) do
+      conn
+      |> put_status(:ok)
+      |> render("show.json", %{user: user})
+    end
+  end
 end

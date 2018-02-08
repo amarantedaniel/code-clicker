@@ -11,5 +11,6 @@ defmodule CodeClickerWeb.Router do
     resources("/users", UserController, only: [:index])
     post("/users/login", UserController, :login)
     post("/users/signup", UserController, :signup)
+    post("/users/save", UserController, :save)
   end
 end
