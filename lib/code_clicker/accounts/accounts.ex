@@ -16,9 +16,19 @@ defmodule CodeClicker.Accounts do
 
   def create_user(attrs \\ %{}) do
     %User{}
-    |> User.changeset(attrs)
+    |> User.signup_changeset(attrs)
     |> Repo.insert()
   end
+
+  def save_progress(%User{} = user, attrs) do
+    user
+    |> User.changeset(attrs)
+    |> Repo.update()
+  end
+
+  # def save_progress(user, ble) do
+  #   user
+  # end
 
   # Not used:
 

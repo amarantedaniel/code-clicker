@@ -15,7 +15,8 @@ defmodule CodeClickerWeb.UserView do
       id: user.id,
       username: user.username,
       password_hash: user.password_hash,
-      company_name: user.company_name
+      company_name: user.company_name,
+      lines_count: user.lines_count
     }
   end
 

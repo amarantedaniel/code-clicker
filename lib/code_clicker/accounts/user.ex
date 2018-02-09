@@ -15,11 +15,17 @@ defmodule CodeClicker.Accounts.User do
     timestamps()
   end
 
-  def changeset(%User{} = user, attrs) do
+  def signup_changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:username, :password, :company_name])
+    |> cast(attrs, [:username, :password])
     |> validate_required([:username, :password])
     |> put_encrypted_password
+  end
+
+  def changeset(%User{} = user, attrs) do
+    user
+    |> cast(attrs, [:lines_count])
+    |> validate_required([:lines_count])
   end
 
   defp put_encrypted_password(changeset) do
