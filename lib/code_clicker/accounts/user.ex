@@ -8,6 +8,7 @@ defmodule CodeClicker.Accounts.User do
     field(:username, :string)
     field(:password_hash, :string)
     field(:password, :string, virtual: true)
+    field(:lines_count, :integer, default: 0)
 
     has_many(:user_items, CodeClicker.Accounts.UserItem)
 
